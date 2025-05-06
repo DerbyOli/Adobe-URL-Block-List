@@ -1,0 +1,28 @@
+name: Convert Domain List to Hosts Format
+
+on:
+  push:
+    paths:
+      - 'PiHole'
+  schedule:
+    - cron: '0 4 * * *'  # Täglich um 04:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Convert to Hosts Format
+        run: |
+          awk '{ print "0.0.0.0 "$1 }' PiHole > PiHole-hosts
+
+      - name: Commit & Push converted file
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add PiHole-hosts
+          git commit -m "Auto-update PiHole-hosts" || echo "No changes"
+          git push
