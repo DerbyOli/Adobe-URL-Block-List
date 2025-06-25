@@ -1,4 +1,4 @@
-name: Sync with upstream
+name: fork-sync-new
 
 on:
   workflow_dispatch:
