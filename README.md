@@ -1,3 +1,8 @@
+### Updates: 
+
+I'm having a burst of energy, so will get around to checking out the recent updates and maybe adding my own, 
+so if you've any code that'll help then please let me know - Rudder.
+
 # Adobe-URL-Block-List
 
 This is a curated list of all the Adobe URL/IP blocklist declared in the `hosts` file.

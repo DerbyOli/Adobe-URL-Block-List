@@ -1,0 +1,25 @@
+name: Sync fork from upstream
+on:
+  schedule:
+    - cron: "17 3 * * *"   # täglich 03:17 UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/Ruddernation-Designs/Adobe-URL-Block-List.git
+          git fetch upstream --prune
+
+      - name: Fast-forward master
+        run: |
+          git checkout master
+          git merge --ff-only upstream/master || true
+          git push origin master
